@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Network Scout</title>
+
+    <link
+        rel="stylesheet"
+        href="sidepanel.css"
+    >
+</head>
+
+<body>
+
+<main class="app">
+
+    <header class="header">
+
+        <div>
+
+            <p class="eyebrow">
+                AI NETWORKING ASSISTANT
+            </p>
+
+            <h1>
+                Network Scout
+            </h1>
+
+        </div>
+
+        <div
+            id="statusDot"
+            class="status-dot disconnected"
+            title="Backend status"
+        ></div>
+
+    </header>
+
+
+    <section class="overview">
+
+        <div>
+
+            <p class="section-label">
+                NETWORK
+            </p>
+
+            <h2>
+                Build the right
+                professional relationships
+            </h2>
+
+        </div>
+
+        <div class="count-box">
+
+            <strong id="candidateCount">
+                —
+            </strong>
+
+            <span id="countLabel">
+                PICKS
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <section
+        id="connectionNotice"
+        class="connection-notice"
+    >
+
+        <span
+            id="connectionBadge"
+            class="badge disconnected"
+        >
+            CHECKING
+        </span>
+
+        <p id="connectionMessage">
+            Connecting to Network Scout...
+        </p>
+
+    </section>
+
+
+    <nav class="view-tabs">
+
+        <button
+            id="weeklyTab"
+            class="view-tab active"
+            type="button"
+        >
+            This Week
+        </button>
+
+        <button
+            id="trackedTab"
+            class="view-tab"
+            type="button"
+        >
+            Tracked
+        </button>
+
+        <button
+            id="notificationsTab"
+            class="view-tab notification-tab"
+            type="button"
+        >
+            <span>
+                Notifications
+            </span>
+
+            <span
+                id="notificationUnreadBadge"
+                class="notification-count hidden"
+            >
+                0
+            </span>
+        </button>
+
+    </nav>
+
+
+    <section class="picks-header">
+
+        <div>
+
+            <p
+                id="sectionLabel"
+                class="section-label"
+            >
+                RECOMMENDATIONS
+            </p>
+
+            <h3 id="sectionTitle">
+                This Week's Picks
+            </h3>
+
+        </div>
+
+        <button
+            id="refreshButton"
+            class="refresh-button"
+            type="button"
+        >
+            Refresh
+        </button>
+
+    </section>
+
+
+    <section
+        id="weeklySummary"
+        class="weekly-summary hidden"
+        aria-live="polite"
+    ></section>
+
+
+    <section
+        id="candidateList"
+        class="candidate-list"
+    >
+
+        <div class="loading-card">
+            Loading Network Scout...
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="sidepanel.js"></script>
+
+</body>
+
+</html>

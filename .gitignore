@@ -1,0 +1,19 @@
+# Created by venv; see https://docs.python.org/3/library/venv.html
+
+.env
+.env.*
+!.env.example
+
+browser_data/
+**/browser_data/
+
+__pycache__/
+*.pyc
+
+.venv/
+venv/
+
+*.log
+
+mock_linkedin/
+**/mock_linkedin/

@@ -1,0 +1,122 @@
+[
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/brian-obot-924b49216/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022253+00:00",
+        "last_checked_at": "2026-10-06T03:23:10.392727+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/jude-onwana-o-d-mnoa-591219345/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022270+00:00",
+        "last_checked_at": "2026-10-06T03:23:22.721664+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/chisom-ugochukwu-8173a776/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022274+00:00",
+        "last_checked_at": "2026-10-06T03:23:29.778029+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/oluwaseyi-taiwo/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022277+00:00",
+        "last_checked_at": "2026-10-06T03:23:37.423586+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/ozurumba-paschal-938a102b2/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022280+00:00",
+        "last_checked_at": "2026-10-06T03:23:48.111655+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/otoabasi-bassey-b6b406392/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022283+00:00",
+        "last_checked_at": "2026-10-06T03:23:55.772258+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/oluchidiala/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022285+00:00",
+        "last_checked_at": "2026-10-06T03:24:05.565007+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/ngoziog/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022287+00:00",
+        "last_checked_at": "2026-10-06T03:24:18.949888+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/chizoba-emeachi-151967309/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022290+00:00",
+        "last_checked_at": "2026-10-06T03:24:26.619336+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    },
+    {
+        "name": null,
+        "profile_url": "https://www.linkedin.com/in/meet-temitope/",
+        "source": "existing_connection_seed",
+        "tracking_status": "active",
+        "monitor_posts": true,
+        "discover_from_comments": true,
+        "added_at": "2026-10-06T03:22:59.022292+00:00",
+        "last_checked_at": "2026-10-06T03:24:46.319884+00:00",
+        "last_seen_post_url": null,
+        "last_seen_post_comment_count": null
+    }
+]

@@ -1,0 +1,21 @@
+{
+  "attempts": [
+    {
+      "connection_name": "Dantes Peak B.eng at Ambrose Alli University",
+      "connection_profile_url": "https://www.linkedin.com/in/dantes-peak-ba9b1719a/",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:6988403228266663936/",
+      "debug": {
+        "captured_at": "2026-10-17T21:30:10.855725+00:00",
+        "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:6988403228266663936/",
+        "page_url": "https://www.linkedin.com/feed/update/urn:li:activity:6988403228266663936/",
+        "profile_link_count": 9,
+        "comment_related_controls": [
+          "Reaction button state: no reaction",
+          "Comment",
+          "3 reactions"
+        ],
+        "commenters_found": 2
+      }
+    }
+  ]
+}

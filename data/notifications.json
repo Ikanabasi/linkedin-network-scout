@@ -1,0 +1,19 @@
+[
+    {
+        "notification_id": "ca71cd4f-00b2-41d3-b0bd-434dc80644cf",
+        "type": "engagement_opportunity",
+        "title": "New Engagement Opportunity",
+        "message": "Adewale Adeniyi has a new post worth engaging with. Network Scout score: 80/100.",
+        "profile_url": "https://www.linkedin.com/in/adewale-adeniyi-781724134/",
+        "person_name": "Adewale Adeniyi",
+        "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:7495752435940978689/",
+        "score": 80,
+        "post_summary": "Adewale Adeniyi is promoting the Sustaining Impact Summit (SIS8), an Africa-wide hybrid conference (Aug 27–29) with virtual passes and 17+ in-person hubs, highlighting Lagos activity and inviting participants to join. The post links to registration and encourages engagement about attending virtually or in person.",
+        "why_relevant": "This summit gathers tech, entrepreneurship, and social-impact leaders across Africa—participants who match the lawyer's target network (founders, executives, tech leaders, community leaders) and could lead to client opportunities, partnerships, or pro bono/community engagement. Notifying the lawyer enables timely outreach (e.g., offer to speak, attend a hub, or connect with organizers/attendees).",
+        "source_detected_at": "2026-10-17T16:25:01.798584+00:00",
+        "created_at": "2026-10-17T22:52:11.146273+00:00",
+        "is_read": true,
+        "dedupe_key": "engagement:https://www.linkedin.com/feed/update/urn:li:activity:7495752435940978689/",
+        "read_at": "2026-10-17T22:52:14.186796+00:00"
+    }
+]

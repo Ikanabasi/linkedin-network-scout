@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Network Scout",
+  "version": "0.4.0",
+  "description": "AI-powered professional networking assistant.",
+  "permissions": [
+    "sidePanel",
+    "tabs",
+    "storage",
+    "scripting",
+    "debugger",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "http://127.0.0.1:8000/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Network Scout"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  }
+}

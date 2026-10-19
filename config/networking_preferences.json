@@ -1,0 +1,29 @@
+{
+    "profession": "Lawyer",
+    "networking_goal": "Build valuable long-term professional relationships with people who may share useful professional interests, create collaboration opportunities, expand the lawyer's network, or provide meaningful business and community connections.",
+    "interests": [
+        "law",
+        "business",
+        "entrepreneurship",
+        "technology",
+        "artificial intelligence",
+        "innovation",
+        "professional services",
+        "community leadership"
+    ],
+    "preferred_people": [
+        "business owners",
+        "founders",
+        "executives",
+        "legal professionals",
+        "technology leaders",
+        "entrepreneurs",
+        "community leaders",
+        "professionals with complementary expertise"
+    ],
+    "deprioritize": [
+        "profiles with no clear professional relevance",
+        "purely promotional or spam-like profiles",
+        "profiles where there is too little professional information to establish a useful networking reason"
+    ]
+}
