@@ -1,19 +1,32 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
 
+# Secrets and environment variables
 .env
 .env.*
 !.env.example
+*.pem
+*.key
 
+# Authenticated LinkedIn browser sessions
 browser_data/
 **/browser_data/
+config/
+**/config/
+playwright/.auth/
+storage_state*.json
 
+# Private candidate and relationship data
+data/*.json
+data/profile_photos/
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Python
 __pycache__/
 *.pyc
-
 .venv/
 venv/
 
+# Temporary files
 *.log
-
-mock_linkedin/
-**/mock_linkedin/
+.DS_Store
