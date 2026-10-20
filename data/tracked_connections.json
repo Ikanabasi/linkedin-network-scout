@@ -556,7 +556,7 @@
         "connection_status": "pending_connection",
         "tracking_active": true,
         "removed_from_tracked": false,
-        "last_updated_at": "2026-10-19T22:59:33.705511+00:00",
+        "last_updated_at": "2026-10-20T02:11:40.510876+00:00",
         "monitoring_active": false,
         "active": false,
         "connection_request": {
@@ -868,5 +868,95 @@
         "profile_photo_local_url": "/profile-photos/markspereira.png",
         "profile_photo_local_path": "C:\\Users\\Ikanabasi Akpan\\Desktop\\linkedin-network-scout\\data\\profile_photos\\markspereira.png",
         "profile_photo_source_url": "https://media.licdn.com/dms/image/v2/D4E03AQFLgSAQaMJwkw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1716145107747?e=1793836800&v=beta&t=-8dZgU0tdOxCCV_0_sz-bhfIPLBDbc13fJtBTrMJdJ4"
+    },
+    {
+        "tracking_id": "9fe2e40b-6dee-4888-a487-31b51b347c88",
+        "profile_url": "https://www.linkedin.com/in/ayodeletim/",
+        "first_tracked_at": "2026-10-20T00:32:34.184603+00:00",
+        "name": "Timothy Ayodele",
+        "connection_name": "Timothy Ayodele",
+        "headline": "Timothy Ayodele • 2nd",
+        "ai_score": 76.0,
+        "why_relevant": "Timothy describes himself as a technology entrepreneur, software engineer, solutions architect, and IT consultant, with work and interests spanning AI, enterprise transformation, software, and digital trust. His stated focus on building technology businesses and training people in practical skills aligns well with the lawyer’s interests in technology, entrepreneurship, innovation, and professional connections. The captured interaction itself is generic and offers little evidence of a substantive connection.",
+        "lawyer_action": "connect",
+        "tracking_source": "network_scout_extension",
+        "relationship_status": "removed",
+        "connection_status": "removed",
+        "tracking_active": false,
+        "removed_from_tracked": true,
+        "last_updated_at": "2026-10-20T00:33:38.045698+00:00",
+        "monitoring_active": false,
+        "active": false,
+        "connection_request": {
+            "action_id": "b4578fd9-83ad-4261-ad32-23b4b496de1f",
+            "status": "verified_pending",
+            "requested_at": "2026-10-20T00:32:13.214Z",
+            "performed_at": "2026-10-20T00:32:34.174Z",
+            "verified": true,
+            "verified_at": "2026-10-20T00:32:34.174Z",
+            "verification_text": "Pending invitation on selected profile"
+        },
+        "removal_history": [
+            {
+                "removed_at": "2026-10-20T00:33:38.045698+00:00",
+                "previous_relationship_status": "pending_connection",
+                "removal_action": "cancel_invite",
+                "verified": true,
+                "verification_text": "Fresh LinkedIn reload shows Connect and no Pending invitation."
+            }
+        ],
+        "previous_relationship_status": "pending_connection",
+        "removed_at": "2026-10-20T00:33:38.045698+00:00",
+        "removal_action": "cancel_invite",
+        "removal_verification": {
+            "verified": true,
+            "verified_at": "2026-10-20T00:33:38.045698+00:00",
+            "verification_text": "Fresh LinkedIn reload shows Connect and no Pending invitation."
+        }
+    },
+    {
+        "tracking_id": "77182f70-ef46-4d65-9017-5876e0853b4a",
+        "profile_url": "https://www.linkedin.com/in/gift-ojabu/",
+        "first_tracked_at": "2026-10-20T00:55:21.616903+00:00",
+        "name": "Gift Ojeabulu",
+        "connection_name": "Gift Ojeabulu",
+        "headline": "Gift Ojeabulu • 2nd",
+        "ai_score": 81.0,
+        "why_relevant": "Gift’s profile describes substantial work in AI and machine learning, including production systems, MLOps, and LLM applications, alongside technical communication and large-scale community leadership. These areas align closely with the lawyer’s interests in technology, innovation, entrepreneurship, and community connections.",
+        "lawyer_action": "connect",
+        "tracking_source": "network_scout_extension",
+        "relationship_status": "removed",
+        "connection_status": "removed",
+        "tracking_active": false,
+        "removed_from_tracked": true,
+        "last_updated_at": "2026-10-20T00:55:44.313401+00:00",
+        "monitoring_active": false,
+        "active": false,
+        "connection_request": {
+            "action_id": "3ca9deba-d20b-4bd1-80f3-a158646f521c",
+            "status": "verified_pending",
+            "requested_at": "2026-10-20T00:54:56.778Z",
+            "performed_at": "2026-10-20T00:55:20.489Z",
+            "verified": true,
+            "verified_at": "2026-10-20T00:55:20.489Z",
+            "verification_text": "Pending invitation on selected profile"
+        },
+        "removal_history": [
+            {
+                "removed_at": "2026-10-20T00:55:44.313401+00:00",
+                "previous_relationship_status": "pending_connection",
+                "removal_action": "cancel_invite",
+                "verified": true,
+                "verification_text": "Fresh LinkedIn reload shows Connect and no Pending invitation."
+            }
+        ],
+        "previous_relationship_status": "pending_connection",
+        "removed_at": "2026-10-20T00:55:44.313401+00:00",
+        "removal_action": "cancel_invite",
+        "removal_verification": {
+            "verified": true,
+            "verified_at": "2026-10-20T00:55:44.313401+00:00",
+            "verification_text": "Fresh LinkedIn reload shows Connect and no Pending invitation."
+        }
     }
 ]

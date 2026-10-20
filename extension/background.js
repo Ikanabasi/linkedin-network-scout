@@ -2003,6 +2003,68 @@ async function runAcceptanceMonitor() {
 
 
 // ======================================================
+// COMMENT REQUEST (separate from relationship actions)
+// ======================================================
+
+function normalizeNetworkScoutPostUrl(value) {
+    try {
+        const url = new URL(value);
+        if (url.protocol !== "https:" ||
+            !["linkedin.com", "www.linkedin.com"].includes(url.hostname.toLowerCase())) return null;
+        if (!(/^\/feed\/update\/urn:li:activity:\d+\/?$/i.test(url.pathname) ||
+              /^\/posts\/[^/]+\/?$/i.test(url.pathname))) return null;
+        return "https://www.linkedin.com" + url.pathname.replace(/\/$/, "");
+    } catch (_) { return null; }
+}
+
+async function handleCommentRequest(message) {
+    const postUrl = normalizeNetworkScoutPostUrl(message?.postUrl);
+    const comment = String(message?.commentText || "").trim();
+    if (!postUrl || !comment || comment.length > 1250) {
+        return { verified: false, status: "invalid_comment_request",
+            message: "Invalid LinkedIn post URL or approved comment." };
+    }
+    let tabId = null;
+    let attempted = false;
+    try {
+        const tab = await chrome.tabs.create({ url: postUrl, active: false });
+        tabId = tab.id;
+        if (!tabId) throw new Error("Could not open the selected LinkedIn post.");
+        await waitForTabComplete(tabId);
+        await sleep(1800);
+        const actualTab = await chrome.tabs.get(tabId);
+        if (normalizeNetworkScoutPostUrl(actualTab.url) !== postUrl) {
+            throw new Error("LinkedIn redirected away from the selected post.");
+        }
+        await chrome.scripting.executeScript({
+            target: { tabId }, files: ["comment_post.js"]
+        });
+        attempted = true;
+        const result = await chrome.tabs.sendMessage(tabId, {
+            type: "NETWORK_SCOUT_SUBMIT_COMMENT_IN_PAGE",
+            postUrl, commentText: comment
+        });
+        if (result?.verified === true && result?.status === "verified_posted") {
+            await chrome.tabs.remove(tabId).catch(() => {});
+            tabId = null;
+        } else if (result?.message?.includes("No comment was submitted.")) {
+            // Before submission, it is safe to clean up the background tab.
+            await chrome.tabs.remove(tabId).catch(() => {});
+            tabId = null;
+        }
+        return result || { verified: false, status: "not_verified",
+            message: "LinkedIn did not return comment verification. Inspect the background post tab before retrying." };
+    } catch (error) {
+        return { verified: false, status: "not_verified",
+            message: (error?.message || "Comment failed.") +
+                (attempted ? " Check the open LinkedIn post before retrying." : " No comment was submitted by Network Scout.") };
+    }
+    // A possibly submitted but unverified comment leaves its background tab
+    // open for inspection; verified posts and pre-submit failures close it.
+}
+
+
+// ======================================================
 // MESSAGE LISTENER
 // ======================================================
 
@@ -2012,6 +2074,17 @@ chrome.runtime.onMessage.addListener(
         sender,
         sendResponse
     ) => {
+
+        // --------------------------------------------------
+        // COMMENT (requires manual approval in sidepanel)
+        // --------------------------------------------------
+        if (message?.type === "NETWORK_SCOUT_COMMENT_REQUEST") {
+            handleCommentRequest(message)
+                .then(sendResponse)
+                .catch(error => sendResponse({ verified: false, status: "failed", message: error.message }));
+            return true;
+        }
+
 
         // --------------------------------------------------
         // CONNECT

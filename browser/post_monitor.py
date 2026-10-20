@@ -3276,6 +3276,34 @@ def select_batch(
     )
 
 
+
+# A post must be no more than seven days old when it is surfaced.
+# Discovery/notification timestamps are not publication timestamps.
+RECENT_POST_MAX_DAYS = 7
+
+
+def post_is_recent(record: dict) -> bool:
+    age = str(record.get("post_age_text") or "").strip().lower()
+    age = re.sub(r"\s+", " ", age)
+    if age in {"now", "just now"}:
+        return True
+    match = re.fullmatch(
+        r"(\d+)\s*(minutes?|mins?|min|m|hours?|hrs?|hr|h|days?|d|weeks?|w|months?|mos?|mo|years?|yrs?|yr|y)",
+        age,
+    )
+    if not match:
+        # Unverifiable publication age is not proof of a recent post.
+        return False
+    amount = int(match.group(1))
+    unit = match.group(2)
+    if unit in {"m", "min", "mins", "minute", "minutes", "h", "hr", "hrs", "hour", "hours"}:
+        return True
+    if unit in {"d", "day", "days"}:
+        return amount <= RECENT_POST_MAX_DAYS
+    if unit in {"w", "week", "weeks"}:
+        return amount * 7 <= RECENT_POST_MAX_DAYS
+    return False
+
 # ==========================================================
 # NEW POSTS
 # ==========================================================
@@ -3872,6 +3900,10 @@ def run_monitor(
                     for post in reversed(
                         new_posts
                     ):
+
+                        if not post_is_recent(post):
+                            print("[POSTS]   Skipped: post older than seven days or publication age unknown.")
+                            continue
 
                         new_posts_found += 1
 

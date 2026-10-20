@@ -3814,7 +3814,7 @@ async function submitLinkedInComment(
             );
 
 
-            await recordEngagementDecision(
+            const recorded = await recordEngagementDecision(
                 notification,
                 "posted",
                 {
@@ -3833,6 +3833,22 @@ async function submitLinkedInComment(
                 }
             );
 
+            if (recorded) {
+                // The backend now excludes verified posted opportunities
+                // from subsequent Notifications refreshes as well.
+                notifications = notifications.filter(
+                    (entry) => entry.notification_id !== notification.notification_id
+                );
+                if (currentView === "notifications") {
+                    renderNotificationsView();
+                }
+            } else {
+                setActionStatus(
+                    statusElement,
+                    "attention",
+                    "Comment verified on LinkedIn, but the completed notification could not be saved. Refresh after the backend reconnects."
+                );
+            }
 
             return;
         }
@@ -3883,6 +3899,66 @@ async function submitLinkedInComment(
 // ======================================================
 // COMMENT COMPOSER
 // ======================================================
+
+async function loadEngagementSuggestions(notification, composer, textarea) {
+    const section = document.createElement("div");
+    section.className = "engagement-suggestions";
+    section.style.marginBottom = "14px";
+    section.appendChild(createTextElement(
+        "div", "engagement-composer-label", "AI COMMENT SUGGESTIONS"
+    ));
+
+    const message = createTextElement(
+        "div", "engagement-status", "Generating three suggestions…"
+    );
+    section.appendChild(message);
+
+    // Display before the manual editor. If generation fails, the manual
+    // posting workflow remains fully available.
+    composer.insertBefore(section, textarea);
+
+    try {
+        const result = await apiFetch("/engagement-suggestions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                notification_id: notification.notification_id,
+                profile_url: notification.profile_url,
+                post_url: notification.post_url
+            })
+        }, 30000);
+
+        if (!section.isConnected) return;
+        const comments = Array.isArray(result?.comments) ? result.comments : [];
+        if (comments.length !== 3) throw new Error("Three suggestions were not returned.");
+
+        message.textContent = "Choose a draft to edit below. Nothing is posted automatically.";
+        const names = ["Professional", "Thoughtful", "Conversational"];
+        comments.forEach((comment, index) => {
+            const selectButton = createTextElement(
+                "button", "engagement-secondary-button",
+                `${names[index]}: ${comment}`
+            );
+            selectButton.type = "button";
+            selectButton.style.cssText =
+                "display:block;width:100%;text-align:left;white-space:normal;" +
+                "height:auto;padding:10px;margin-top:8px;line-height:1.45;";
+            selectButton.addEventListener("click", () => {
+                textarea.value = comment;
+                textarea.dispatchEvent(new Event("input", { bubbles: true }));
+                textarea.focus();
+            });
+            section.appendChild(selectButton);
+        });
+    } catch (error) {
+        if (section.isConnected) {
+            message.textContent =
+                "Suggestions unavailable. You can still write and post your own comment.";
+        }
+        console.warn("Could not generate comment suggestions:", error);
+    }
+}
+
 
 function createEngagementComposer(
     notification,
@@ -4057,6 +4133,9 @@ function createEngagementComposer(
         composer
     );
 
+    // Suggestions are optional assistance. Posting still uses the original
+    // submitLinkedInComment path and requires an explicit click.
+    loadEngagementSuggestions(notification, composer, textarea);
 
     textarea.focus();
 }

@@ -659,51 +659,105 @@
         if (!loaded.ok) return loaded.result;
 
         const { root, state } = loaded;
+        const initialProfile = verifyExpectedProfile(message?.profileUrl);
+        if (!initialProfile.ok) return initialProfile.result;
 
         const unfollowButton = findTopCardAction(root, "unfollow");
-
         if (!unfollowButton) {
+            // Absence of Following alone is not proof: require the actual
+            // target profile to present its Follow action.
+            if (state.followAvailable && !state.following) {
+                return {
+                    status: "already_not_following",
+                    verified: true,
+                    profile_url: currentProfileUrl(),
+                    verification_text: "Follow is available on the selected profile",
+                    profile_name: state.profileName
+                };
+            }
             return {
-                status: "already_not_following",
-                verified: true,
-                verification_text: "Selected profile is not currently followed",
-                profile_name: state.profileName
+                status: "unfollow_not_verified",
+                verified: false,
+                profile_name: state.profileName,
+                message: "The selected profile does not show a verifiable Following or Follow control."
             };
         }
 
-        const containersBeforeClick = visibleMenus();
-
-        unfollowButton.scrollIntoView({
-            block: "center",
-            inline: "center"
-        });
-
-        unfollowButton.click();
-        await wait(300);
-
-        const confirmUnfollow = findNewConfirmationAction(
-            containersBeforeClick,
-            (label) =>
-                label === "unfollow"
-                || label.startsWith("unfollow "),
-            unfollowButton
+        // Remember the previously visible dialogs so that unrelated page
+        // content can never be treated as the target's confirmation.
+        const modalSelector = "[role='dialog'], [aria-modal='true'], .artdeco-modal, dialog";
+        const existingDialogs = new Set(
+            [...document.querySelectorAll(modalSelector)].filter(visible)
         );
 
-        if (confirmUnfollow) {
-            confirmUnfollow.click();
+        unfollowButton.scrollIntoView({ block: "center", inline: "center" });
+        unfollowButton.click();
+
+        // LinkedIn may render the confirmation asynchronously and may reuse
+        // dialog nodes. Inspect only a visible modal with an Unfollow action;
+        // never click an Unfollow control elsewhere on the page.
+        let confirmation = null;
+        const started = Date.now();
+        while (Date.now() - started < 5000) {
+            const check = verifyExpectedProfile(message?.profileUrl);
+            if (!check.ok) return check.result;
+
+            const dialogs = [...document.querySelectorAll(modalSelector)]
+                .filter(visible)
+                .filter((dialog) => {
+                    if (!existingDialogs.has(dialog)) return true;
+                    // Previously hidden modals can be reused after opening.
+                    return clean(dialog.innerText || dialog.textContent).includes("unfollow");
+                });
+
+            for (const dialog of dialogs) {
+                if (!clean(dialog.innerText || dialog.textContent).includes("unfollow")) {
+                    continue;
+                }
+                const buttons = [...dialog.querySelectorAll("button, [role='button']")]
+                    .filter(visible)
+                    .filter((element) => !element.disabled && element.getAttribute("aria-disabled") !== "true");
+                const action = buttons.find((element) =>
+                    labelsFor(element).some((label) =>
+                        label === "unfollow" || label === "unfollow person"
+                    )
+                );
+                if (action) {
+                    confirmation = action;
+                    break;
+                }
+            }
+            if (confirmation) break;
+            await wait(200);
         }
+
+        if (!confirmation) {
+            return {
+                status: "unfollow_not_verified",
+                verified: false,
+                profile_name: state.profileName,
+                message: "LinkedIn did not expose an identifiable Unfollow confirmation. No removal was recorded."
+            };
+        }
+
+        const beforeConfirm = verifyExpectedProfile(message?.profileUrl);
+        if (!beforeConfirm.ok) return beforeConfirm.result;
+        confirmation.click();
 
         const verified = await pollState(
             message?.profileUrl, message?.candidateName,
-            (nextState) => !nextState.following,
-            3500
+            // Positive evidence from the selected header; a closed dialog
+            // or missing Following control is insufficient.
+            (nextState) => nextState.followAvailable && !nextState.following,
+            7000
         );
 
         if (verified.ok) {
             return {
                 status: "verified_unfollowed",
                 verified: true,
-                verification_text: "Selected profile is no longer followed",
+                profile_url: currentProfileUrl(),
+                verification_text: "Follow button verified on selected profile after Unfollow confirmation",
                 profile_name: verified.state.profileName
             };
         }
@@ -712,7 +766,7 @@
             status: "unfollow_not_verified",
             verified: false,
             profile_name: state.profileName,
-            message: "Unfollow was clicked, but LinkedIn has not yet exposed a verified unfollowed state."
+            message: "Unfollow was confirmed, but LinkedIn has not yet exposed a verified Follow state. No removal was recorded."
         };
     };
 
